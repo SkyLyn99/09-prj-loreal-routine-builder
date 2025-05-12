@@ -86,7 +86,7 @@ body {
   width: 100%;
   text-align: center;
   padding: 40px;
-  color: #666;
+  color: #FFFFFF;
   font-size: 18px;
 }
 
@@ -102,7 +102,7 @@ body {
   padding: 12px;
   font-size: 18px;
   border: none;
-  border-bottom: 2px solid #ccc;
+  border-bottom: 2px solid #FFFFFF;
   background: transparent;
 }
 
@@ -127,7 +127,7 @@ body {
 }
 
 .chat-form button:hover {
-  background: #666666;
+  background: #FF003B;
 }
 
 .chat-form button:focus {
@@ -153,7 +153,7 @@ body {
   margin: 60px 0 40px;
   text-align: center;
   font-size: 14px;
-  color: #666;
+  color: #FF003B;
 }
 
 .site-footer nav {
@@ -167,7 +167,7 @@ body {
 }
 
 .site-footer a:hover {
-  color: #666666;
+  color: #FFFFFF;
 }
 
 /* products grid */
@@ -180,7 +180,7 @@ body {
 
 .product-card {
   flex: 0 1 calc(33.333% - 14px);
-  border: 1px solid #ccc;
+  border: 1px solid #E3A535;
   padding: 15px;
   border-radius: 4px;
   display: flex;
@@ -247,7 +247,7 @@ body {
 }
 
 .generate-btn:hover {
-  background: #666;
+  background: #E3A535;
 }
 
 .generate-btn i {
