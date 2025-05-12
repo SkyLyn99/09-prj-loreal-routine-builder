@@ -2,18 +2,72 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Weather App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L'Oréal | Smart Routine &amp; Product Advisor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Weather App</h1>
-  <div id="weatherDisplay"></div>
+  <!-- Weather Section -->
+  <section id="weatherSection" style="margin: 30px auto; text-align: center;">
+    <h2>Weather App</h2>
+    <div id="weatherDisplay" style="padding: 15px; border: 1px solid #ccc; border-radius: 10px;"></div>
+  </section>
 
+  <!-- Main Content Section (Routine Builder) -->
+  <div class="page-wrapper">
+    <header class="site-header">
+      <img src="img/loreal-logo.png" alt="L'Oréal Logo" class="logo">
+      <h1 class="site-title">Smart Routine &amp; Product Advisor</h1>
+    </header>
+
+    <div class="search-section">
+      <select id="categoryFilter">
+        <option value="" disabled selected>Choose a Category</option>
+        <option value="cleanser">Cleansers</option>
+        <option value="moisturizer">Moisturizers & Treatments</option>
+        <option value="haircare">Haircare</option>
+        <option value="makeup">Makeup</option>
+        <option value="hair color">Hair Color</option>
+        <option value="hair styling">Hair Styling</option>
+        <option value="men's grooming">Men's Grooming</option>
+        <option value="suncare">Suncare</option>
+        <option value="fragrance">Fragrance</option>
+      </select>
+    </div>
+
+    <div id="productsContainer" class="products-grid"></div>
+
+    <div class="selected-products">
+      <h2>Selected Products</h2>
+      <div id="selectedProductsList"></div>
+      <button id="generateRoutine" class="generate-btn">
+        <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Routine
+      </button>
+    </div>
+
+    <section class="chatbox">
+      <h2>Let's Build Your Routine</h2>
+      <div id="chatWindow" class="chat-window"></div>
+      <div id="chatInteraction" style="margin-top: 20px;">
+        <input id="userMessage" type="text" placeholder="Ask a question..." style="width: 80%;" />
+        <button id="sendMessageBtn">Send</button>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <p>&copy; 2025 L'Oréal. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
   <script>
-    const apiKey = 'YOUR_API_KEY_HERE'; // replace with your actual key
+    // Weather App Script (Replace API Key with yours)
+    const apiKey = 'YOUR_API_KEY'; // Replace with your actual key
     const city = 'London';
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+    const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
 
-    fetch(url)
+    fetch(weatherUrl)
       .then(response => response.json())
       .then(data => {
         const temperature = data.main.temp;
@@ -21,7 +75,7 @@
 
         const weatherDisplay = document.getElementById('weatherDisplay');
         weatherDisplay.innerHTML = `
-          <h2>Current Weather in ${data.name}</h2>
+          <h3>Current Weather in ${data.name}</h3>
           <p>Temperature: ${temperature}°C</p>
           <p>Condition: ${weatherDescription}</p>
         `;
