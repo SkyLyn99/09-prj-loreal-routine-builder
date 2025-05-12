@@ -20,6 +20,15 @@ async function loadProducts() {
 
 /* Create HTML for displaying product cards */
 function displayProducts(products) {
+  if (products.length === 0) {
+    productsContainer.innerHTML = `
+      <div class="no-products-message">
+        No products found in this category.
+      </div>
+    `;
+    return;
+  }
+
   productsContainer.innerHTML = products
     .map(
       (product) => `
@@ -40,11 +49,10 @@ categoryFilter.addEventListener("change", async (e) => {
   const products = await loadProducts();
   const selectedCategory = e.target.value;
 
-  /* filter() creates a new array containing only products 
-     where the category matches what the user selected */
-  const filteredProducts = products.filter(
-    (product) => product.category === selectedCategory
-  );
+  const filteredProducts =
+    selectedCategory === "All"
+      ? products
+      : products.filter((product) => product.category === selectedCategory);
 
   displayProducts(filteredProducts);
 });

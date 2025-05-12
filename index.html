@@ -1,127 +1,32 @@
-<body></body>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>L'Oréal | Smart Routine &amp; Product Advisor</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-    />
-    <link rel="stylesheet" href="style.css" />
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <title>Weather App</title>
+</head>
+<body>
+  <h1>Weather App</h1>
+  <div id="weatherDisplay"></div>
 
-  <body>
-    <div class="page-wrapper">
-      <!------- Header / Branding ------->
-      <header class="site-header">
-        <img src="img/loreal-logo.png" alt="L'Oréal Logo" class="logo" />
-        <h1 class="site-title">Smart Routine &amp; Product Advisor</h1>
-      </header>
+  <script>
+    const apiKey = 'YOUR_API_KEY_HERE'; // replace with your actual key
+    const city = 'London';
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
 
-      <!-- Category Filter -->
-      <div class="search-section">
-        <select id="categoryFilter">
-          <option value="" disabled selected>Choose a Category</option>
-          <option value="cleanser">Cleansers</option>
-          <option value="moisturizer">Moisturizers & Treatments</option>
-          <option value="haircare">Haircare</option>
-          <option value="makeup">Makeup</option>
-          <option value="hair color">Hair Color</option>
-          <option value="hair styling">Hair Styling</option>
-          <option value="men's grooming">Men's Grooming</option>
-          <option value="suncare">Suncare</option>
-          <option value="fragrance">Fragrance</option>
-        </select>
-      </div>
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        const temperature = data.main.temp;
+        const weatherDescription = data.weather[0].description;
 
-      <!-- Products Grid -->
-      <div id="productsContainer" class="products-grid"></div>
-
-      <!-- Selected Products -->
-      <div class="selected-products">
-        <h2>Selected Products</h2>
-        <div id="selectedProductsList"></div>
-        <button id="generateRoutine" class="generate-btn">
-          <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Routine
-        </button>
-      </div>
-
-      <!------- Chat Area ------->
-      <section class="chatbox">
-        <h2>Let's Build Your Routine</h2>
-        <div id="chatWindow" class="chat-window"></div>
-
-        <form id="chatForm" class="chat-form">
-          <label for="userInput" class="visually-hidden">Message</label>
-          <input
-            id="userInput"
-            name="userInput"
-            type="text"
-            placeholder="Ask me about products or routines…"
-            autocomplete="off"
-            required
-          />
-          <button type="submit" id="sendBtn">
-            <i class="fa-solid fa-paper-plane"></i>
-            <span class="visually-hidden">Send</span>
-          </button>
-        </form>
-      </section>
-
-      <!------- Footer Links ------->
-      <footer class="site-footer">
-        <p>&copy; 2025 L'Oréal. All rights reserved.</p>
-        <nav>
-          <!-- These URLs are placeholders -->
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Use</a>
-          <a href="#">Contact</a>
-        </nav>
-      </footer>
-    </div>
-
-    <!-- secrets.js can be removed when using Cloudflare Workers for API requests -->
-    <script src="secrets.js"></script>
-    <script src="script.js"></script>
-  </body>
-</html>
- <section id="fact-vs-opinion-worksheet" style="padding: 20px; max-width: 600px; margin: auto;">
-    <h2>🎯 ESL Worksheet: Fact vs. Opinion</h2>
-    <p><strong>📝 Instructions:</strong> Read each sentence below. Write <strong>F</strong> if it is a <strong>Fact</strong>, or <strong>O</strong> if it is an <strong>Opinion</strong>.</p>
-    <ol>
-      <li>The Eiffel Tower is located in Paris. _____</li>
-      <li>Chocolate ice cream is the best flavor. _____</li>
-      <li>Water boils at 100 degrees Celsius. _____</li>
-      <li>Summer is more fun than winter. _____</li>
-      <li>The capital of Japan is Tokyo. _____</li>
-      <li>I think cats are better pets than dogs. _____</li>
-      <li>Elephants are the largest land animals. _____</li>
-      <li>Soccer is a boring sport. _____</li>
-      <li>There are seven days in a week. _____</li>
-      <li>Reading is more interesting than watching TV. _____</li>
-    </ol>
-
-    <div style="margin-top: 20px;">
-      <h3>🧠 Think About It:</h3>
-      <p>Choose one fact and one opinion from above. Write your own sentence using each word in a new way.</p>
-      <p><strong>Fact Sentence:</strong> ______________________________</p>
-      <p><strong>Opinion Sentence:</strong> ____________________________</p>
-    </div>
-  </section>
-  <section id="routine-section" style="margin: 30px auto; max-width: 600px;">
-  <h2>🧴 Generate a Personalized Routine</h2>
-  <button id="generateRoutineBtn">Generate Routine</button>
-
-  <div id="chatWindow" style="margin-top: 20px; padding: 15px; border: 1px solid #ccc; border-radius: 10px;">
-    <p><strong>💬 AI Routine Response:</strong></p>
-    <div id="routineOutput">No routine yet. Click the button above!</div>
-  </div>
-</section>
-
+        const weatherDisplay = document.getElementById('weatherDisplay');
+        weatherDisplay.innerHTML = `
+          <h2>Current Weather in ${data.name}</h2>
+          <p>Temperature: ${temperature}°C</p>
+          <p>Condition: ${weatherDescription}</p>
+        `;
+      })
+      .catch(error => console.error('Error fetching weather:', error));
+  </script>
 </body>
+</html>
